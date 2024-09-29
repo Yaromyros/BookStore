@@ -1,6 +1,7 @@
 package org.example.bookstore.repository.impl;
 
 import java.util.List;
+import org.example.bookstore.exception.DataProcessingException;
 import org.example.bookstore.model.Book;
 import org.example.bookstore.repository.BookRepository;
 import org.hibernate.Session;
@@ -32,7 +33,7 @@ public class BookDaoImpl implements BookRepository {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Cannot save book", e);
+            throw new DataProcessingException("Cannot save book", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -42,17 +43,11 @@ public class BookDaoImpl implements BookRepository {
 
     @Override
     public List<Book> findAll() {
-        Session session = null;
-        try {
-            session = sessionFactory.openSession();
+        try (Session session = sessionFactory.openSession()) {
             String hql = "from Book";
             return session.createQuery(hql, Book.class).list();
         } catch (Exception e) {
-            throw new RuntimeException("Cannot find all books", e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            throw new DataProcessingException("Cannot save book", e);
         }
     }
 }
