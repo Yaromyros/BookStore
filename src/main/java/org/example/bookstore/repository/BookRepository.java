@@ -1,10 +1,13 @@
 package org.example.bookstore.repository;
 
 import java.util.List;
-import org.example.bookstore.model.Book;
+import java.util.Optional;
+import org.example.bookstore.model.entity.Book;
 
 public interface BookRepository {
     Book save(Book book);
 
     List<Book> findAll();
+
+    Optional<Book> findById(Long id);
 }
