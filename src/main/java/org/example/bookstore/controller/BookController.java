@@ -2,8 +2,8 @@ package org.example.bookstore.controller;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.example.bookstore.model.dto.BookDto;
-import org.example.bookstore.model.dto.CreateBookRequestDto;
+import org.example.bookstore.dto.BookDto;
+import org.example.bookstore.dto.CreateBookRequestDto;
 import org.example.bookstore.service.BookService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

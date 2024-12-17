@@ -3,7 +3,7 @@ package org.example.bookstore.repository.impl;
 import java.util.List;
 import java.util.Optional;
 import org.example.bookstore.exception.DataProcessingException;
-import org.example.bookstore.model.entity.Book;
+import org.example.bookstore.model.Book;
 import org.example.bookstore.repository.BookRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
