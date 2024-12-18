@@ -1,20 +1,19 @@
 package org.example.bookstore.repository.impl;
 
 import java.util.List;
+import java.util.Optional;
 import org.example.bookstore.exception.DataProcessingException;
 import org.example.bookstore.model.Book;
 import org.example.bookstore.repository.BookRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class BookDaoImpl implements BookRepository {
     private final SessionFactory sessionFactory;
 
-    @Autowired
     public BookDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -48,6 +47,15 @@ public class BookDaoImpl implements BookRepository {
             return session.createQuery(hql, Book.class).list();
         } catch (Exception e) {
             throw new DataProcessingException("Cannot save book", e);
+        }
+    }
+
+    @Override
+    public Optional<Book> findById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(Book.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException("Cannot retrieve book by id: " + id, e);
         }
     }
 }
