@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IsbnSpecificationProvider {
-    private final String ISBN_FIELD_NAME = "isbn";
+    private static final String ISBN_FIELD_NAME = "isbn";
 
     public Specification<Book> getSpecification(String param) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(ISBN_FIELD_NAME), param);
+        return (root, query, criteriaBuilder) -> criteriaBuilder
+                .equal(root.get(ISBN_FIELD_NAME), param);
     }
 }

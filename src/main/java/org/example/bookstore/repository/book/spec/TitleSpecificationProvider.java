@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TitleSpecificationProvider {
-    private final String TITLE_FIELD_NAME = "title";
+    private static final String TITLE_FIELD_NAME = "title";
 
     public Specification<Book> getSpecification(String param) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(TITLE_FIELD_NAME), param);
+        return (root, query, criteriaBuilder) -> criteriaBuilder
+                .equal(root.get(TITLE_FIELD_NAME), param);
     }
 }

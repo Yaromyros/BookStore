@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthorSpecificationProvider {
-    private final String AUTHOR_FIELD_NAME = "author";
+    private static final String AUTHOR_FIELD_NAME = "author";
 
     public Specification<Book> getSpecification(String param) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(AUTHOR_FIELD_NAME), param);
+        return (root, query, criteriaBuilder) -> criteriaBuilder
+                .equal(root.get(AUTHOR_FIELD_NAME), param);
     }
 }
