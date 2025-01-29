@@ -19,6 +19,7 @@ public class GlobalExceptionHandler {
     private static final String TIME_STAMP = "timestamp";
     private static final String STATUS = "status";
     private static final String ERRORS = "errors";
+    private static final String MESSAGE = "message";
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleMethodArgumentNotValid(
@@ -37,10 +38,9 @@ public class GlobalExceptionHandler {
     public final ResponseEntity<Map<String, Object>> handleEntityNotFoundException(
             EntityNotFoundException ex) {
         Map<String, Object> body = Map.of(
-                "timestamp", LocalDateTime.now(),
-                "status", HttpStatus.BAD_REQUEST.value(),
-                "error", "Bad Request",
-                "message", ex.getMessage()
+                TIME_STAMP, LocalDateTime.now(),
+                STATUS, HttpStatus.BAD_REQUEST.value(),
+                MESSAGE, ex.getMessage()
         );
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
