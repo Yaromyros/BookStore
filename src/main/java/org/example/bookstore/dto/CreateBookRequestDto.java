@@ -1,6 +1,7 @@
 package org.example.bookstore.dto;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -10,17 +11,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateBookRequestDto {
-    @NotNull(message = "Title cannot be null")
+    @NotBlank(message = "Title cannot be blank")
     @Size(max = 255, message = "Title must not exceed 255 characters")
     private String title;
 
-    @NotNull(message = "Author cannot be null")
+    @NotBlank(message = "Author cannot be blank")
     @Size(max = 255, message = "Author must not exceed 255 characters")
     private String author;
 
     private String isbn;
 
-    @NotNull(message = "Price cannot be null")
+    @NotNull(message = "Price cannot be blank")
     @Min(value = 0, message = "Price must be greater than or equal to 0")
     private BigDecimal price;
 

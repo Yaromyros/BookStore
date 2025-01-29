@@ -2,6 +2,7 @@ package org.example.bookstore.exception;
 
 import static java.util.stream.Collectors.toList;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,18 @@ public class GlobalExceptionHandler {
                 TIME_STAMP, LocalDateTime.now(),
                 STATUS, HttpStatus.BAD_REQUEST.value(),
                 ERRORS, getErrorMessages(ex)
+        );
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public final ResponseEntity<Map<String, Object>> handleEntityNotFoundException(EntityNotFoundException ex) {
+        Map<String, Object> body = Map.of(
+                "timestamp", LocalDateTime.now(),
+                "status", HttpStatus.BAD_REQUEST.value(),
+                "error", "Bad Request",
+                "message", ex.getMessage()
         );
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
